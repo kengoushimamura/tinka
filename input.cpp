@@ -412,9 +412,9 @@ HRESULT InitializePad(void)			// パッド初期化
 			return false; // データフォーマットの設定に失敗
 
 		// モードを設定（フォアグラウンド＆非排他モード）
-//		result = pGamePad[i]->SetCooperativeLevel(hWindow, DISCL_NONEXCLUSIVE | DISCL_FOREGROUND);
-//		if ( FAILED(result) )
-//			return false; // モードの設定に失敗
+		//		result = pGamePad[i]->SetCooperativeLevel(hWindow, DISCL_NONEXCLUSIVE | DISCL_FOREGROUND);
+		//		if ( FAILED(result) )
+		//			return false; // モードの設定に失敗
 
 		// 軸の値の範囲を設定
 		// X軸、Y軸のそれぞれについて、オブジェクトが報告可能な値の範囲をセットする。

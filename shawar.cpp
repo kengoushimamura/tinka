@@ -42,14 +42,14 @@ HRESULT MakeVertexShawar(void);
 static ID3D11Buffer* g_VertexBuffer = NULL;		// 頂点バッファ
 
 static ID3D11ShaderResourceView* g_Texture[TEXTURE_MAX] = { NULL };	// テクスチャ情報
-static int							g_TexNo;					// テクスチャ番号
+static int							g_TexNo;						// テクスチャ番号
 
-static SHAWAR					g_aShawar[MAX_SHAWAR];		// パーティクルワーク
-static XMFLOAT3					g_posBase;						// ビルボード発生位置
-static float					g_fWidthBase = 5.0f;			// 基準の幅
-static float					g_fHeightBase = 10.0f;			// 基準の高さ
-static float					g_roty = 0.0f;					// 移動方向
-static float					g_spd = 0.0f;					// 移動スピード
+static SHAWAR					g_aShawar[MAX_SHAWAR];				// パーティクルワーク
+static XMFLOAT3					g_posBase;							// ビルボード発生位置
+static float					g_fWidthBase = 5.0f;				// 基準の幅
+static float					g_fHeightBase = 10.0f;				// 基準の高さ
+static float					g_roty = 0.0f;						// 移動方向
+static float					g_spd = 0.0f;						// 移動スピード
 
 static char* g_TextureName[TEXTURE_MAX] =
 {
@@ -147,14 +147,9 @@ void UpdateShawar(void)
 			g_aShawar[nCntShawar].pos.z += g_aShawar[nCntShawar].move.z;
 			g_aShawar[nCntShawar].pos.y += g_aShawar[nCntShawar].move.y;
 
-			//かめはめ波
-			//g_aShawar[nCntShawar].pos.x -= sinf(g_aShawar[nCntShawar].rot.y) * g_aShawar[nCntShawar].move.x;
-			//g_aShawar[nCntShawar].pos.z -= cosf(g_aShawar[nCntShawar].rot.y) * g_aShawar[nCntShawar].move.z;
-
-
 			g_aShawar[nCntShawar].move.x += (0.0f - g_aShawar[nCntShawar].move.x) * 0.015f;
-			g_aShawar[nCntShawar].move.y -= (0.0f - g_aShawar[nCntShawar].move.y) * 0.015f;//0.25f;
-			g_aShawar[nCntShawar].move.z += 0.25f;//(0.0f - g_aShawar[nCntShawar].move.z) * 0.015f;
+			g_aShawar[nCntShawar].move.y -= (0.0f - g_aShawar[nCntShawar].move.y) * 0.015f;
+			g_aShawar[nCntShawar].move.z += 0.25f;
 
 #ifdef DISP_SHADOW
 			if (g_aShawar[nCntShawar].nIdxShadow != -1)
