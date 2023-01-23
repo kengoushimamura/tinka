@@ -26,28 +26,10 @@
 #define	SHAWAR_SIZE_Y		(40.0f)		// 頂点サイズ
 #define	VALUE_MOVE_SHAWAR	(5.0f)		// 移動速度
 
-#define	MAX_SHAWAR		(512)		// パーティクル最大数
 
 #define	DISP_SHADOW						// 影の表示
 //#undef DISP_SHADOW
 
-//*****************************************************************************
-// 構造体定義
-//*****************************************************************************
-typedef struct
-{
-	XMFLOAT3		pos;			// 位置
-	XMFLOAT3		rot;			// 回転
-	XMFLOAT3		scale;			// スケール
-	XMFLOAT3		move;			// 移動量
-	MATERIAL		material;		// マテリアル
-	float			fSizeX;			// 幅
-	float			fSizeY;			// 高さ
-	int				nIdxShadow;		// 影ID
-	int				nLife;			// 寿命
-	bool			bUse;			// 使用しているかどうか
-
-} SHAWAR;
 
 //*****************************************************************************
 // プロトタイプ宣言
@@ -156,24 +138,23 @@ void UninitShawar(void)
 //=============================================================================
 void UpdateShawar(void)
 {
-	bPLAYER* bplayer = GetbPlayer();
 
 	for (int nCntShawar = 0; nCntShawar < MAX_SHAWAR; nCntShawar++)
 	{
 		if (g_aShawar[nCntShawar].bUse)
 		{	// 使用中
-			//g_aShawar[nCntShawar].pos.x += g_aShawar[nCntShawar].move.x;
-			//g_aShawar[nCntShawar].pos.z += g_aShawar[nCntShawar].move.z;
-			//g_aShawar[nCntShawar].pos.y += g_aShawar[nCntShawar].move.y;
+			g_aShawar[nCntShawar].pos.x += g_aShawar[nCntShawar].move.x;
+			g_aShawar[nCntShawar].pos.z += g_aShawar[nCntShawar].move.z;
+			g_aShawar[nCntShawar].pos.y += g_aShawar[nCntShawar].move.y;
 
 			//かめはめ波
-			g_aShawar[nCntShawar].pos.x -= sinf(g_aShawar[nCntShawar].rot.y) * g_aShawar[nCntShawar].move.x;
-			g_aShawar[nCntShawar].pos.z -= cosf(g_aShawar[nCntShawar].rot.y) * g_aShawar[nCntShawar].move.z;
+			//g_aShawar[nCntShawar].pos.x -= sinf(g_aShawar[nCntShawar].rot.y) * g_aShawar[nCntShawar].move.x;
+			//g_aShawar[nCntShawar].pos.z -= cosf(g_aShawar[nCntShawar].rot.y) * g_aShawar[nCntShawar].move.z;
 
 
 			g_aShawar[nCntShawar].move.x += (0.0f - g_aShawar[nCntShawar].move.x) * 0.015f;
-			g_aShawar[nCntShawar].move.y -= 0.25f;
-			g_aShawar[nCntShawar].move.z += (0.0f - g_aShawar[nCntShawar].move.z) * 0.015f;
+			g_aShawar[nCntShawar].move.y -= (0.0f - g_aShawar[nCntShawar].move.y) * 0.015f;//0.25f;
+			g_aShawar[nCntShawar].move.z += 0.25f;//(0.0f - g_aShawar[nCntShawar].move.z) * 0.015f;
 
 #ifdef DISP_SHADOW
 			if (g_aShawar[nCntShawar].nIdxShadow != -1)
@@ -404,4 +385,10 @@ int SetShawar(XMFLOAT3 pos, XMFLOAT3 move, XMFLOAT4 col, float fSizeX, float fSi
 	}
 
 	return nIdxShawar;
+}
+
+SHAWAR* GetShawar(void)
+{
+	return &g_aShawar[0];
+
 }

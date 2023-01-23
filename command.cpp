@@ -48,7 +48,7 @@ static bool						g_Use;						// true:使っている  false:未使用
 static float					g_w, g_h;					// 幅と高さ
 static XMFLOAT3					g_Pos;						// ポリゴンの座標
 static int						g_TexNo;					// テクスチャ番号
-static int						check;						//コマンド選択用
+static int						check	=	40;						//コマンド選択用
 static int						cmd;						//コマンド
 static BOOL						g_Load = FALSE;
 

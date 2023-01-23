@@ -311,6 +311,8 @@ void CheckHit2(void)
 	ENEMY* enemy = GetEnemy();				//エネミーのポインターを初期化
 	bPLAYER* bplayer = GetbPlayer();		// プレイヤーのポインターを初期化
 	BUTTLEBULLET* bbullet = GetButtleBullet();	// 弾のポインターを初期化
+	SHAWAR* shawar = GetShawar();				//水のポインターを初期化
+
 
 	// 敵とプレイヤーキャラ
 	for (int i = 0; i < MAX_B_ENEMY; i++)
@@ -363,6 +365,39 @@ void CheckHit2(void)
 		}
 
 	}
+
+	//水と敵
+	for (int i = 0; i < MAX_SHAWAR; i++)
+	{
+		//水の有効フラグをチェックする
+		if (shawar[i].bUse == false)
+			continue;
+
+		// 敵と当たってるか調べる
+		for (int j = 0; j < MAX_B_ENEMY; j++)
+		{
+			//敵の有効フラグをチェックする
+			if (benemy[j].use == false)
+				continue;
+
+			//BCの当たり判定
+			if (CollisionBC(shawar[i].pos, benemy[j].pos, SHAWAR_SIZE, benemy[j].size))
+			{
+				// 当たったから水は未使用に戻す
+				shawar[i].bUse = false;
+				ReleaseShadow(shawar[i].nIdxShadow);
+
+				// 敵キャラクターは倒される
+				benemy[j].use = false;
+				ReleaseShadow(enemy[j].shadowIdx);
+
+				// スコアを足す
+				AddScore(10);
+			}
+		}
+
+	}
+
 
 
 	// バトル用エネミーが全部死亡したら状態遷移

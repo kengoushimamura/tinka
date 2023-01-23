@@ -334,13 +334,17 @@ void UpdateBattlePlayer(void)
 	// 弾発射処理
 	if (GetKeyboardTrigger(DIK_SPACE))
 	{
+		if (cmd[0] == 0)
+		{
+
+		}
 		if (cmd[0] == 1)
 		{
 			SetButtleBullet(g_bPlayer.pos, g_bPlayer.rot);
 		}
 		if (cmd[0] == 2)
 		{
-			for (int j = 0; j < 300; j++)
+			for (int j = 0; j < 10; j++)
 			{
 				XMFLOAT3 pos;
 				XMFLOAT3 move;
@@ -353,8 +357,8 @@ void UpdateBattlePlayer(void)
 				fAngle = (float)(rand() % 628 - 314) / 100.0f;
 				fLength = rand() % (int)(5.0f * 200) / 100.0f - 5.0f;
 				move.x = sinf(fAngle) * fLength;
-				move.y = rand() % 300 / 100.0f + 10.0f;
-				move.z = cosf(fAngle) * fLength;
+				move.z = rand() % 300 / 100.0f + 10.0f;
+				move.y = cosf(fAngle) * fLength;
 
 				nLife = rand() % 5 + 5;
 
@@ -374,6 +378,36 @@ void UpdateBattlePlayer(void)
 		{
 			SetButtleBullet(g_bPlayer.pos, g_bPlayer.rot);
 		}
+		if (cmd[0] == 2)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				XMFLOAT3 pos;
+				XMFLOAT3 move;
+				float fAngle, fLength;
+				int nLife;
+				float fSize;
+
+				pos = g_bPlayer.pos;
+
+				fAngle = (float)(rand() % 628 - 314) / 100.0f;
+				fLength = rand() % (int)(5.0f * 200) / 100.0f - 5.0f;
+				move.x = sinf(fAngle) * fLength;
+				move.z = rand() % 300 / 100.0f + 10.0f;
+				move.y = cosf(fAngle) * fLength;
+
+				nLife = rand() % 5 + 5;
+
+				fSize = (float)(rand() % 30 + 20);
+
+				pos.y = fSize / 2;
+
+				// ビルボードの設定
+				SetShawar(pos, move, XMFLOAT4(0.0f, 0.0f, 1.0f, 0.85f), fSize, fSize, nLife);
+
+			}
+		}
+
 	}
 
 
@@ -529,8 +563,6 @@ void DrawBattlePlayer(void)
 
 	// モデル描画
 	DrawModel(&g_bPlayer.model);
-
-
 
 	// 階層アニメーション
 	for (int i = 0; i < bPLAYER_PARTS_MAX; i++)
