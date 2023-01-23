@@ -70,17 +70,17 @@ static INTERPOLATION_DATA move_tbl_right_arm[] = {	// pos, rot, scl, frame
 
 //左腕のアニメーション
 static INTERPOLATION_DATA move_tbl_left_arm[] = {	// pos, rot, scl, frame
-	{ XMFLOAT3(5.0f,  5.0f, 0.0f), XMFLOAT3(0.0f, XM_PI / 2, -XM_PI / 4),			XMFLOAT3(1.0f, 1.0f, 1.0f), 15 },
-	{ XMFLOAT3(5.0f,  5.0f, 0.0f), XMFLOAT3(0.0f, XM_PI / 2, -XM_PI / 2),			XMFLOAT3(1.0f, 1.0f, 1.0f), 15 },
-	{ XMFLOAT3(5.0f,  5.0f, 0.0f), XMFLOAT3(0.0f, XM_PI / 2, -XM_PI * 3 / 4),		XMFLOAT3(1.0f, 1.0f, 1.0f), 15 },
-	{ XMFLOAT3(5.0f,  5.0f, 0.0f), XMFLOAT3(0.0f, XM_PI / 2, -XM_PI / 2),			XMFLOAT3(1.0f, 1.0f, 1.0f), 15 },
+	{ XMFLOAT3(5.0f,  5.0f, 0.0f), XMFLOAT3(0.0f, XM_PI / 2,     -XM_PI / 4),			XMFLOAT3(1.0f, 1.0f, 1.0f), 15 },
+	{ XMFLOAT3(5.0f,  5.0f, 0.0f), XMFLOAT3(0.0f, XM_PI / 2,     -XM_PI / 2),			XMFLOAT3(1.0f, 1.0f, 1.0f), 15 },
+	{ XMFLOAT3(5.0f,  5.0f, 0.0f), XMFLOAT3(0.0f, XM_PI / 2, -XM_PI * 3 / 4),			XMFLOAT3(1.0f, 1.0f, 1.0f), 15 },
+	{ XMFLOAT3(5.0f,  5.0f, 0.0f), XMFLOAT3(0.0f, XM_PI / 2,     -XM_PI / 2),			XMFLOAT3(1.0f, 1.0f, 1.0f), 15 },
 };
 
 //右足のアニメーション
 static INTERPOLATION_DATA move_tbl_right_leg[] = {	// pos, rot, scl, frame
 	{ XMFLOAT3(-2.5f,  -5.0f, 0.0f), XMFLOAT3(XM_PI / 4, 0.0f,  0.0f),	XMFLOAT3(1.0f, 1.0f, 1.0f), 15 },
 	{ XMFLOAT3(-2.5f,  -5.0f, 0.0f), XMFLOAT3(0.0f,      0.0f,  0.0f),	XMFLOAT3(1.0f, 1.0f, 1.0f), 15 },
-	{ XMFLOAT3(-2.5f,  -5.0f, 0.0f), XMFLOAT3(-XM_PI / 4, 0.0f,  0.0f),	XMFLOAT3(1.0f, 1.0f, 1.0f), 15 },
+	{ XMFLOAT3(-2.5f,  -5.0f, 0.0f), XMFLOAT3(-XM_PI / 4, 0.0f, 0.0f),	XMFLOAT3(1.0f, 1.0f, 1.0f), 15 },
 	{ XMFLOAT3(-2.5f,  -5.0f, 0.0f), XMFLOAT3(0.0f,      0.0f,  0.0f),	XMFLOAT3(1.0f, 1.0f, 1.0f), 15 },
 
 };
@@ -136,7 +136,7 @@ HRESULT InitBattlePlayer(void)
 	// キーを押した時のプレイヤーの向き
 	roty = 0.0f;
 
-	g_bPlayer.parent = -1;			// 本体（親）なので変なのが入らないようにー１
+	g_bPlayer.parent = -1;				// 本体（親）なので変なのが入らないようにー１
 
 
 	// 階層アニメーションの初期化
@@ -150,12 +150,9 @@ HRESULT InitBattlePlayer(void)
 		g_Parts[i].scl = XMFLOAT3(1.0f, 1.0f, 1.0f);
 
 		// 親子関係
-		g_Parts[i].parent = -1;		// ← ここに親のアドレスを入れる　
-	//	g_Parts[腕].parent= &g_bPlayer;		// 腕だったら親は本体（プレイヤー）
-	//	g_Parts[手].parent= &g_Paerts[腕];	// 指が腕の子供だった場合の例
+		g_Parts[i].parent = -1;			// ← ここに親のアドレスを入れる　
 
 		// 階層アニメーション用のメンバー変数の初期化
-		//g_Parts[i].tbl_adr = move_tbl;	// 再生するアニメデータの先頭アドレスをセット
 		g_Parts[i].move_time = 0.0f;	// 実行時間をクリア
 		g_Parts[i].tblNo = 0;			// 再生する行動データテーブルNoをセット
 		g_Parts[i].tblMax = 0;			// 再生する行動データテーブルのレコード数をセット
@@ -252,50 +249,6 @@ void UpdateBattlePlayer(void)
 
 	g_bPlayer.spd *= 0.1f;
 
-	// 移動処理
-	//if (GetKeyboardPress(DIK_LEFT))
-	//{
-	//	g_bPlayer.spd = VALUE_MOVE;
-	//	roty = XM_PI / 2;
-	//}
-	//if (IsButtonPressed(0, BUTTON_LEFT))
-	//{
-	//	g_bPlayer.spd = VALUE_MOVE;
-	//	roty = XM_PI / 2;
-	//}
-
-	//if (GetKeyboardPress(DIK_RIGHT))
-	//{
-	//	g_bPlayer.spd = VALUE_MOVE;
-	//	roty = -XM_PI / 2;
-	//}
-	//if (IsButtonPressed(0, BUTTON_RIGHT))
-	//{
-	//	g_bPlayer.spd = VALUE_MOVE;
-	//	roty = -XM_PI / 2;
-	//}
-
-	//if (GetKeyboardPress(DIK_UP))
-	//{
-	//	g_bPlayer.spd = VALUE_MOVE;
-	//	roty = XM_PI;
-	//}
-	//if (IsButtonPressed(0, BUTTON_UP))
-	//{
-	//	g_bPlayer.spd = VALUE_MOVE;
-	//	roty = XM_PI;
-	//}
-
-	//if (GetKeyboardPress(DIK_DOWN))
-	//{
-	//	g_bPlayer.spd = VALUE_MOVE;
-	//	roty = 0.0f;
-	//}	
-	//if (IsButtonPressed(0, BUTTON_DOWN))
-	//{
-	//	g_bPlayer.spd = VALUE_MOVE;
-	//	roty = 0.0f;
-	//}
 
 #ifdef _DEBUG
 	if (GetKeyboardPress(DIK_R))
@@ -305,15 +258,6 @@ void UpdateBattlePlayer(void)
 		roty = 0.0f;
 	}
 #endif
-
-
-	//{	// 押した方向にプレイヤーを移動させる
-	//	// 押した方向にプレイヤーを向かせている所
-	//	g_bPlayer.rot.y = roty + cam->rot.y;
-
-	//	g_bPlayer.pos.x -= sinf(g_bPlayer.rot.y) * g_bPlayer.spd;
-	//	g_bPlayer.pos.z -= cosf(g_bPlayer.rot.y) * g_bPlayer.spd;
-	//}
 
 
 	// レイキャストして足元の高さを求める
@@ -407,7 +351,6 @@ void UpdateBattlePlayer(void)
 
 			}
 		}
-
 	}
 
 
@@ -428,10 +371,10 @@ void UpdateBattlePlayer(void)
 			float	time = g_Parts[i].move_time - index;
 			int		size = sizeof(move_tbl_right_arm) / sizeof(INTERPOLATION_DATA);
 
-			float dt = 1.0f / g_MoveTblAdr[g_Parts[i].tblNo][index].frame;	// 1フレームで進める時間
-			g_Parts[i].move_time += dt;										// アニメーションの合計時間に足す
+			float dt = 1.0f / g_MoveTblAdr[g_Parts[i].tblNo][index].frame;				// 1フレームで進める時間
+			g_Parts[i].move_time += dt;													// アニメーションの合計時間に足す
 
-			if (index > (size - 2))	// ゴールをオーバーしていたら、最初へ戻す
+			if (index > (size - 2))														// ゴールをオーバーしていたら、最初へ戻す
 			{
 				g_Parts[i].move_time = 0.0f;
 				index = 0;

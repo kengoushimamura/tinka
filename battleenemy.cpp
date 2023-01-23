@@ -19,11 +19,11 @@
 #define	MODEL_B_ENEMY			"data/MODEL/firesprit.obj"		// 読み込むモデル名
 
 
-#define	VALUE_MOVE			(5.0f)						// 移動量
-#define	VALUE_ROTATE		(XM_PI * 0.02f)				// 回転量
+#define	VALUE_MOVE			(5.0f)								// 移動量
+#define	VALUE_ROTATE		(XM_PI * 0.02f)						// 回転量
 
-#define ENEMY_SHADOW_SIZE	(0.4f)						// 影の大きさ
-#define ENEMY_OFFSET_Y		(3.0f)						// エネミーの足元をあわせる
+#define ENEMY_SHADOW_SIZE	(0.4f)								// 影の大きさ
+#define ENEMY_OFFSET_Y		(3.0f)								// エネミーの足元をあわせる
 
 
 //*****************************************************************************
@@ -51,11 +51,11 @@ HRESULT InitBattleEnemy(void)
 		LoadModel(MODEL_B_ENEMY, &g_bEnemy[i].model);
 		g_bEnemy[i].load = true;
 
-		g_bEnemy[i].pos = XMFLOAT3(/*-50.0f + i * 3*/0.0f, ENEMY_OFFSET_Y, 30.0f);
+		g_bEnemy[i].pos = XMFLOAT3(0.0f, ENEMY_OFFSET_Y, 30.0f);
 		g_bEnemy[i].rot = XMFLOAT3(0.0f, 0.0f, 0.0f);
 		g_bEnemy[i].scl = XMFLOAT3(1.0f, 1.0f, 1.0f);
 
-		g_bEnemy[i].spd = 0.0f;			// 移動スピードクリア
+		g_bEnemy[i].spd  = 0.0f;			// 移動スピードクリア
 		g_bEnemy[i].size = bENEMY_SIZE;	// 当たり判定の大きさ
 
 		// モデルのディフューズを保存しておく。色変え対応の為。
@@ -107,15 +107,15 @@ void UpdateBattleEnemy(void)
 	for (int i = 0; i < MAX_B_ENEMY; i++)
 	{
 		if (g_bEnemy[i].use == true)			// このエネミーが使われている？
-		{									// Yes
+		{										// Yes
 			if (g_bEnemy[i].tbl_adr != NULL)	// 線形補間を実行する？
-			{								// 線形補間の処理
+			{									// 線形補間の処理
 				// 移動処理
 				int		index = (int)g_bEnemy[i].move_time;
 				float	time = g_bEnemy[i].move_time - index;
 				int		size = g_bEnemy[i].tbl_size;
 
-				float dt = 1.0f / g_bEnemy[i].tbl_adr[index].frame;	// 1フレームで進める時間
+				float dt = 1.0f / g_bEnemy[i].tbl_adr[index].frame;		// 1フレームで進める時間
 				g_bEnemy[i].move_time += dt;							// アニメーションの合計時間に足す
 
 				if (index > (size - 2))	// ゴールをオーバーしていたら、最初へ戻す
