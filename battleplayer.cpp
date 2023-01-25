@@ -17,6 +17,8 @@
 #include "meshfield.h"
 #include "command.h"
 #include "shawar.h"
+#include "battleenemy.h"
+#include "thander.h"
 
 //*****************************************************************************
 // É}ÉNÉçíËã`
@@ -244,6 +246,8 @@ void UninitBattlePlayer(void)
 void UpdateBattlePlayer(void)
 {
 	CAMERA* cam = GetCamera();
+	bENEMY* enemy = GetBattleEnemy();
+
 
 	int* cmd = GetCommand();
 
@@ -280,7 +284,22 @@ void UpdateBattlePlayer(void)
 	{
 		if (cmd[0] == 0)
 		{
+			XMFLOAT3 pos;
+			XMFLOAT3 move = {0.0f,0.0f,0.0f};
+			float fAngle, fLength;
+			int nLife;
+			float fSizey,fSizex;
 
+			pos = enemy[0].pos;
+
+
+			nLife = rand() % 5 + 5;
+
+			fSizey = (float)(rand() % 30 + 120);
+			fSizex = fSizey / 5;
+
+
+			SetThander(pos, move, XMFLOAT4(1.0f, 1.0f, 0.0f, 0.85f), fSizex, fSizey, nLife);
 		}
 		if (cmd[0] == 1)
 		{
@@ -318,6 +337,23 @@ void UpdateBattlePlayer(void)
 	}
 	if (IsButtonTriggered(0, BUTTON_B))
 	{
+		if (cmd[0] == 0)
+		{
+			XMFLOAT3 pos;
+			XMFLOAT3 move = { 0.0f,0.0f,0.0f };
+			float fAngle, fLength;
+			int nLife;
+			float fSizey, fSizex;
+
+			pos = enemy[0].pos;
+
+			nLife = rand() % 5 + 5;
+
+			fSizey = (float)(rand() % 30 + 120);
+			fSizex = fSizey / 5;
+
+			SetThander(pos, move, XMFLOAT4(1.0f, 1.0f, 0.0f, 0.85f), fSizex, fSizey, nLife);
+		}
 		if (cmd[0] == 1)
 		{
 			SetButtleBullet(g_bPlayer.pos, g_bPlayer.rot);

@@ -25,6 +25,7 @@
 #include "enemy.h"
 #include "command.h"
 #include "shawar.h"
+#include "thander.h"
 
 //*****************************************************************************
 // マクロ定義
@@ -94,6 +95,8 @@ HRESULT InitBattle(void)
 
 	InitShawar();
 
+	InitThander();
+
 	InitCommand();
 
 
@@ -115,6 +118,8 @@ void UninitBattle(void)
 	UninitParticle();
 
 	UninitCommand();
+
+	UninitThander();
 
 	UninitShawar();
 
@@ -186,6 +191,8 @@ void UpdateBattle(void)
 
 	UpdateShawar();
 
+	UpdateThander();
+
 	// 影の更新処理
 	UpdateShadow();
 
@@ -224,6 +231,8 @@ void DrawBattle0(void)
 	DrawParticle();
 
 	DrawShawar();
+
+	DrawThander();
 
 	// 2Dの物を描画する処理
 	// Z比較なし

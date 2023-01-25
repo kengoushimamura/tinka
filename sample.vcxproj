@@ -168,6 +168,7 @@
     <ClInclude Include="tutorial.h" />
     <ClInclude Include="command.h" />
     <ClInclude Include="shawar.h" />
+    <ClInclude Include="thander.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bullet.cpp" />
@@ -200,6 +201,7 @@
     <ClCompile Include="tutorial.cpp" />
     <ClCompile Include="command.cpp" />
     <ClCompile Include="shawar.cpp" />
+    <ClCompile Include="thander.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
