@@ -347,10 +347,12 @@ void UpdateBattlePlayer(void)
 
 			pos = enemy[0].pos;
 
+
 			nLife = rand() % 5 + 5;
 
 			fSizey = (float)(rand() % 30 + 120);
 			fSizex = fSizey / 5;
+
 
 			SetThander(pos, move, XMFLOAT4(1.0f, 1.0f, 0.0f, 0.85f), fSizex, fSizey, nLife);
 		}

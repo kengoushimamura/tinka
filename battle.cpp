@@ -321,6 +321,7 @@ void CheckHit2(void)
 	bPLAYER* bplayer = GetbPlayer();		// プレイヤーのポインターを初期化
 	BUTTLEBULLET* bbullet = GetButtleBullet();	// 弾のポインターを初期化
 	SHAWAR* shawar = GetShawar();				//水のポインターを初期化
+	THANDER* thander = GetThander();
 
 
 	// 敵とプレイヤーキャラ
