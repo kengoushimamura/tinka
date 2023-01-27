@@ -172,17 +172,17 @@ void UpdateParticle(void)
 				g_aParticle[nCntParticle].move.z += (0.0f - g_aParticle[nCntParticle].move.z) * 0.015f;
 
 #ifdef DISP_SHADOW
-				if(g_aParticle[nCntParticle].nIdxShadow != -1)
-				{// âeégópíÜ
-					float colA;
+				//if(g_aParticle[nCntParticle].nIdxShadow != -1)
+				//{// âeégópíÜ
+				//	float colA;
 
-					// âeÇÃà íuê›íË
-					SetPositionShadow(g_aParticle[nCntParticle].nIdxShadow, XMFLOAT3(g_aParticle[nCntParticle].pos.x, 0.1f, g_aParticle[nCntParticle].pos.z));
+				//	// âeÇÃà íuê›íË
+				//	SetPositionShadow(g_aParticle[nCntParticle].nIdxShadow, XMFLOAT3(g_aParticle[nCntParticle].pos.x, 0.1f, g_aParticle[nCntParticle].pos.z));
 
-					// âeÇÃêFÇÃê›íË
-					colA = g_aParticle[nCntParticle].material.Diffuse.w;
-					SetColorShadow(g_aParticle[nCntParticle].nIdxShadow, XMFLOAT4(0.5f, 0.5f, 0.5f, colA));
-				}
+				//	// âeÇÃêFÇÃê›íË
+				//	colA = g_aParticle[nCntParticle].material.Diffuse.w;
+				//	SetColorShadow(g_aParticle[nCntParticle].nIdxShadow, XMFLOAT4(0.5f, 0.5f, 0.5f, colA));
+				//}
 #endif
 
 				g_aParticle[nCntParticle].nLife--;
@@ -451,11 +451,11 @@ int SetParticle(XMFLOAT3 pos, XMFLOAT3 move, XMFLOAT4 col, float fSizeX, float f
 
 #ifdef DISP_SHADOW
 			// âeÇÃê›íË
-			g_aParticle[nCntParticle].nIdxShadow = CreateShadow(XMFLOAT3(pos.x, 0.1f, pos.z), 0.8f, 0.8f);		// âeÇÃê›íË
-			if(g_aParticle[nCntParticle].nIdxShadow != -1)
-			{
-				SetColorShadow(g_aParticle[nCntParticle].nIdxShadow, XMFLOAT4(1.0f, 1.0f, 1.0f, 0.5f));
-			}
+			//g_aParticle[nCntParticle].nIdxShadow = CreateShadow(XMFLOAT3(pos.x, 0.1f, pos.z), 0.8f, 0.8f);		// âeÇÃê›íË
+			//if(g_aParticle[nCntParticle].nIdxShadow != -1)
+			//{
+			//	SetColorShadow(g_aParticle[nCntParticle].nIdxShadow, XMFLOAT4(1.0f, 1.0f, 1.0f, 0.5f));
+			//}
 #endif
 
 			break;

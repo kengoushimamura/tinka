@@ -378,7 +378,7 @@ void CheckHit2(void)
 
 				// 敵キャラクターは倒される
 				benemy[j].use = false;
-				ReleaseShadow(enemy[j].shadowIdx);
+				ReleaseShadow(benemy[j].shadowIdx);
 
 				// スコアを足す
 				AddScore(10);
@@ -406,7 +406,7 @@ void CheckHit2(void)
 			{
 				// 敵キャラクターは倒される
 				benemy[j].use = false;
-				ReleaseShadow(enemy[j].shadowIdx);
+				ReleaseShadow(benemy[j].shadowIdx);
 
 				// スコアを足す
 				AddScore(10);
@@ -435,7 +435,7 @@ void CheckHit2(void)
 			{
 				// 敵キャラクターは倒される
 				benemy[j].use = false;
-				ReleaseShadow(enemy[j].shadowIdx);
+				ReleaseShadow(benemy[j].shadowIdx);
 
 				// スコアを足す
 				AddScore(10);
