@@ -93,12 +93,14 @@ HRESULT InitBattle(void)
 	// スコアの初期化
 	//InitScore();
 
+	//水の初期化
 	InitShawar();
 
+	//雷の初期化
 	InitThander();
 
+	//コマンド初期化
 	InitCommand();
-
 
 	// パーティクルの初期化
 	InitParticle();
@@ -117,10 +119,13 @@ void UninitBattle(void)
 	// パーティクルの終了処理
 	UninitParticle();
 
+	//コマンドの終了処理
 	UninitCommand();
 
+	//雷の終了処理
 	UninitThander();
 
+	//水の終了処理
 	UninitShawar();
 
 	// スコアの終了処理
@@ -172,6 +177,7 @@ void UpdateBattle(void)
 	// 地面処理の更新
 	UpdateMeshField();
 
+	//コマンドの更新処理
 	UpdateCommand();
 
 	// プレイヤーの更新処理
@@ -189,8 +195,10 @@ void UpdateBattle(void)
 	// パーティクルの更新処理
 	UpdateParticle();
 
+	//水の更新処理
 	UpdateShawar();
 
+	//雷の更新処理
 	UpdateThander();
 
 	// 影の更新処理
@@ -230,8 +238,10 @@ void DrawBattle0(void)
 	// パーティクルの描画処理
 	DrawParticle();
 
+	//水の描画処理
 	DrawShawar();
 
+	//雷の描画処理
 	DrawThander();
 
 	// 2Dの物を描画する処理
@@ -244,6 +254,7 @@ void DrawBattle0(void)
 	// スコアの描画処理
 	DrawScore();
 
+	//コマンド表示
 	DrawCommand();
 
 	// ライティングを有効に
@@ -316,12 +327,12 @@ void DrawBattle(void)
 //=============================================================================
 void CheckHit2(void)
 {
-	bENEMY* benemy = GetBattleEnemy();		// バトル用エネミーのポインターを初期化
-	ENEMY* enemy = GetEnemy();				//エネミーのポインターを初期化
-	bPLAYER* bplayer = GetbPlayer();		// プレイヤーのポインターを初期化
-	BUTTLEBULLET* bbullet = GetButtleBullet();	// 弾のポインターを初期化
-	SHAWAR* shawar = GetShawar();				//水のポインターを初期化
-	THANDER* thander = GetThander();
+	bENEMY* benemy =		GetBattleEnemy();		// バトル用エネミーのポインターを初期化
+	ENEMY* enemy =			GetEnemy();				//エネミーのポインターを初期化
+	bPLAYER* bplayer =		GetbPlayer();			// プレイヤーのポインターを初期化
+	BUTTLEBULLET* bbullet = GetButtleBullet();		// 弾のポインターを初期化
+	SHAWAR* shawar =		GetShawar();			//水のポインターを初期化
+	THANDER* thander =		GetThander();
 
 
 	// 敵とプレイヤーキャラ
@@ -393,10 +404,35 @@ void CheckHit2(void)
 			//BCの当たり判定
 			if (CollisionBC(shawar[i].pos, benemy[j].pos, SHAWAR_SIZE, benemy[j].size))
 			{
-				// 当たったから水は未使用に戻す
-				shawar[i].bUse = false;
-				ReleaseShadow(shawar[i].nIdxShadow);
+				// 敵キャラクターは倒される
+				benemy[j].use = false;
+				ReleaseShadow(enemy[j].shadowIdx);
 
+				// スコアを足す
+				AddScore(10);
+			}
+		}
+
+	}
+
+
+	//雷と敵
+	for (int i = 0; i < MAX_THANDER; i++)
+	{
+		//雷の有効フラグをチェックする
+		if (thander[i].bUse == false)
+			continue;
+
+		// 敵と当たってるか調べる
+		for (int j = 0; j < MAX_B_ENEMY; j++)
+		{
+			//敵の有効フラグをチェックする
+			if (benemy[j].use == false)
+				continue;
+
+			//BCの当たり判定
+			if (CollisionBC(thander[i].pos, benemy[j].pos, THANDER_SIZE, benemy[j].size))
+			{
 				// 敵キャラクターは倒される
 				benemy[j].use = false;
 				ReleaseShadow(enemy[j].shadowIdx);
