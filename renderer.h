@@ -31,6 +31,8 @@ enum BLEND_MODE
 	BLEDD_MODE_NUM
 };
 
+
+
 enum CULL_MODE
 {
 	CULL_MODE_NONE,			//カリング無し
@@ -39,6 +41,8 @@ enum CULL_MODE
 
 	CULL_MODE_NUM
 };
+
+
 
 
 //*********************************************************
@@ -82,6 +86,12 @@ struct FOG {
 	float		FogEnd;		// フォグの最大距離
 	XMFLOAT4	FogColor;	// フォグの色
 };
+
+//D3D11_TEXTURE2D_DESC renderTextureDesc;
+
+
+
+
 
 
 //*****************************************************************************

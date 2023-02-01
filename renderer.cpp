@@ -698,6 +698,19 @@ HRESULT InitRenderer(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 	material.Ambient = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	SetMaterial(material);
 
+	//シャドウマップ初期化
+	//renderTextureDesc.Width = SCREEN_WIDTH;
+	//renderTextureDesc.Height = SCREEN_HEIGHT;
+	//renderTextureDesc.MipLevels = 1;
+	//renderTextureDesc.ArraySize = 1;
+	//renderTextureDesc.Format = DXGI_FORMAT.DXGI_FORMAT_R32_FLOAT;
+	//renderTextureDesc.SampleDesc.Count = 1;
+	//renderTextureDesc.SampleDesc.Quality = 0;
+	//renderTextureDesc.Usage = D3D11_USAGE.D3D11_USAGE_DEFAULT;
+	//renderTextureDesc.BindFlags = D3D11_BIND_FLAG.D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_FLAG.D3D11_BIND_RENDER_TARGET;
+	//renderTextureDesc.CPUAccessFlags = 0;
+
+
 	return S_OK;
 }
 
@@ -757,6 +770,46 @@ void Present(void)
 {
 	g_SwapChain->Present( 0, 0 );
 }
+
+
+//=============================================================================
+// シャドウマップ
+//=============================================================================
+//void Shadowmap(void)
+//{
+//	if (FAILED(device.CreateTexture2D(&renderTextureDesc, null, &renderTarget_)))
+//	{
+//		cleanup();
+//		throw new Error("Failed create depth stencil shadow texture");
+//	}
+//
+//	if (FAILED(device.CreateRenderTargetView(renderTarget_, null, &renderTargetView_)))
+//	{
+//		cleanup();
+//		throw new Error("Failed create depth stencil shadow texture view");
+//	}
+//
+//	if (FAILED(device.CreateShaderResourceView(renderTarget_, null, &renderTargetResourceView_)))
+//	{
+//		cleanup();
+//		throw new Error("Failed create depth stencil shadow texture resource view");
+//	}
+//
+//	deviceContext.OMSetRenderTargets(1, &renderTargetView_, depthStencilView_);
+//	return input.pos.z;
+//
+//	immediateContext_.PSSetShaderResources(1, 1, &depthTextureView);
+//
+//	float2 depthTexCoord;
+//	depthTexCoord.x = (input.lpos.x + 1) * 0.5;
+//	depthTexCoord.y = (1 - input.lpos.y) * 0.5;
+//
+//	float minDepth = depthTex.Sample(sam, depthTexCoord).r + 0.0005f;
+//
+//	ID3D11ShaderResourceView nullView = null;
+//	immediateContext_.PSSetShaderResources(1, 1, &nullView);
+//
+//}
 
 
 //=============================================================================

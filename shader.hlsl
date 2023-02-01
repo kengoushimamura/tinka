@@ -231,3 +231,5 @@ void PixelShaderPolygon( in  float4 inPosition		: SV_POSITION,
 	}
 
 }
+
+

@@ -199,7 +199,7 @@ HRESULT InitMeshField(XMFLOAT3 pos, XMFLOAT3 rot,
 			}
 
 			if(nCntVtxZ < (g_nNumBlockZField - 1))
-			{// k‘Þƒ|ƒŠƒSƒ“‚Ì‚½‚ß‚Ìƒ_ƒu‚è‚ÌÝ’è
+			{	// k‘Þƒ|ƒŠƒSƒ“‚Ì‚½‚ß‚Ìƒ_ƒu‚è‚ÌÝ’è
 				pIdx[nCntIdx] = nCntVtxZ * (g_nNumBlockXField + 1) + g_nNumBlockXField;
 				nCntIdx++;
 			}
@@ -273,7 +273,7 @@ void UpdateMeshField(void)
 			float len = (float)sqrt(dx * dx + dz * dz);
 
 			// ”g‚Ì‚‚³‚ðAsinŠÖ”‚Å“¾‚é
-			//  @”g‚Ì‚‚³@= sin( -Œo‰ßŽžŠÔ * Žü”g” + ‹——£ * ‹——£•â³ ) * U•
+			// ”g‚Ì‚‚³@= sin( -Œo‰ßŽžŠÔ * Žü”g” + ‹——£ * ‹——£•â³ ) * U•
 			if (gMode == MODE_GAME)
 			{
 				g_Vertex[z * (g_nNumBlockXField + 1) + x].Position.y = 0.0f;

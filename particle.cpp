@@ -61,12 +61,12 @@ static ID3D11Buffer					*g_VertexBuffer = NULL;		// 頂点バッファ
 static ID3D11ShaderResourceView		*g_Texture[TEXTURE_MAX] = { NULL };	// テクスチャ情報
 static int							g_TexNo;					// テクスチャ番号
 
-static PARTICLE					g_aParticle[MAX_PARTICLE];		// パーティクルワーク
-static XMFLOAT3					g_posBase;						// ビルボード発生位置
-static float					g_fWidthBase = 5.0f;			// 基準の幅
-static float					g_fHeightBase = 10.0f;			// 基準の高さ
-static float					g_roty = 0.0f;					// 移動方向
-static float					g_spd = 0.0f;					// 移動スピード
+static PARTICLE						g_aParticle[MAX_PARTICLE];		// パーティクルワーク
+static XMFLOAT3						g_posBase;						// ビルボード発生位置
+static float						g_fWidthBase = 5.0f;			// 基準の幅
+static float						g_fHeightBase = 10.0f;			// 基準の高さ
+static float						g_roty = 0.0f;					// 移動方向
+static float						g_spd = 0.0f;					// 移動スピード
 
 static char *g_TextureName[TEXTURE_MAX] =
 {
