@@ -116,8 +116,53 @@ void UpdateEnemy(void)
 			XMFLOAT3 pos = g_Enemy[i].pos;
 			pos.y -= (ENEMY_OFFSET_Y - 0.1f);
 			SetPositionShadow(g_Enemy[i].shadowIdx, pos);
+
+			// レイキャストして足元の高さを求める
+			XMFLOAT3 HitPosition;		// 交点
+			XMFLOAT3 Normal;			// ぶつかったポリゴンの法線ベクトル（向き）
+			bool ans = RayHitField(g_Enemy[i].pos, &HitPosition, &Normal);
+			if (ans)
+			{
+				g_Enemy[i].pos.y = HitPosition.y + ENEMY_OFFSET_Y;
+			}
+			else
+			{
+				g_Enemy[i].pos.y = ENEMY_OFFSET_Y;
+				Normal = XMFLOAT3(0.0f, 1.0f, 0.0f);
+			}
+
+			//////////////////////////////////////////////////////////////////////
+			// 姿勢制御
+			//////////////////////////////////////////////////////////////////////
+
+			XMVECTOR vx, nvx, up;
+			XMVECTOR quat;
+			float len, angle;
+
+
+			g_Enemy[i].UpVector = Normal;
+			up = { 0.0f, 1.0f, 0.0f, 0.0f };
+			vx = XMVector3Cross(up, XMLoadFloat3(&g_Enemy[i].UpVector));
+
+			nvx = XMVector3Length(vx);
+			XMStoreFloat(&len, nvx);
+			nvx = XMVector3Normalize(vx);
+			//nvx = vx / len;
+			angle = asinf(len);
+
+			//quat = XMQuaternionIdentity();
+
+		//	quat = XMQuaternionRotationAxis(nvx, angle);
+			quat = XMQuaternionRotationNormal(nvx, angle);
+
+
+			quat = XMQuaternionSlerp(XMLoadFloat4(&g_Enemy[i].Quaternion), quat, 0.05f);
+			XMStoreFloat4(&g_Enemy[i].Quaternion, quat);
+
 		}
 	}
+
+
 
 }
 

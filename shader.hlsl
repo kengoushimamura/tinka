@@ -63,6 +63,7 @@ struct FOG
 	float		Dummy[3];//16byte境界用
 };
 
+
 // フォグ用バッファ
 cbuffer FogBuffer : register( b5 )
 {
@@ -75,6 +76,7 @@ cbuffer Fuchi : register(b6)
 	int			fuchi;
 	int			fill[3];
 };
+
 
 
 cbuffer CameraBuffer : register(b7)

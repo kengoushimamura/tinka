@@ -97,6 +97,7 @@ static ID3D11Buffer*			g_LightBuffer = NULL;
 static ID3D11Buffer*			g_FogBuffer = NULL;
 static ID3D11Buffer*			g_FuchiBuffer = NULL;
 static ID3D11Buffer*			g_CameraBuffer = NULL;
+static ID3D11Buffer*			g_ShadowmapBuffer = NULL;
 
 static ID3D11DepthStencilState* g_DepthStateEnable;
 static ID3D11DepthStencilState* g_DepthStateDisable;

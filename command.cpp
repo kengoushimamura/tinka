@@ -19,7 +19,7 @@
 //*****************************************************************************
 #define TEXTURE_WIDTH				(SCREEN_WIDTH)	// 背景サイズ
 #define TEXTURE_HEIGHT				(SCREEN_HEIGHT)	// 
-#define TEXTURE_MAX					(4)				// テクスチャの数
+#define TEXTURE_MAX					(5)				// テクスチャの数
 
 #define TEXTURE_WIDTH_LOGO			(160)			// ロゴサイズ
 #define TEXTURE_HEIGHT_LOGO			(80)			// 
@@ -40,6 +40,7 @@ static char* g_TexturName[TEXTURE_MAX] = {
 	"data/TEXTURE/magic.png",
 	"data/TEXTURE/smash.png",
 	"data/TEXTURE/guard.png",
+	"data/TEXTURE/command.jpg",
 
 };
 
@@ -241,6 +242,16 @@ void DrawCommand(void)
 	ZeroMemory(&material, sizeof(material));
 	material.Diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	SetMaterial(material);
+
+	// テクスチャ設定
+	GetDeviceContext()->PSSetShaderResources(0, 1, &g_Texture[4]);
+
+	// １枚のポリゴンの頂点とテクスチャ座標を設定
+	SetSprite(g_VertexBuffer, g_w /2, g_Pos.y + 40, TEXTURE_WIDTH_LOGO * 2, TEXTURE_HEIGHT_LOGO * 2, 0.0f, 0.0f, 1.0f, 1.0f);
+
+	// ポリゴン描画
+	GetDeviceContext()->Draw(4, 0);
+
 
 
 	// 攻撃を強調
