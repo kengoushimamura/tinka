@@ -371,7 +371,7 @@ int SetThander(XMFLOAT3 pos, XMFLOAT3 move, XMFLOAT4 col, float fSizeX, float fS
 			g_aThander[nCntThander].nIdxShadow = CreateShadow(XMFLOAT3(pos.x, 0.1f, pos.z), 0.8f, 0.8f);		// âeÇÃê›íË
 			if (g_aThander[nCntThander].nIdxShadow != -1)
 			{
-				SetColorShadow(g_aThander[nCntThander].nIdxShadow, XMFLOAT4(1.0f, 1.0f, 1.0f, 0.5f));
+				SetColorShadow(g_aThander[nCntThander].nIdxShadow, XMFLOAT4(0.0f, 0.0f, 0.0f, 0.5f));
 			}
 #endif
 
