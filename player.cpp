@@ -15,6 +15,7 @@
 #include "bullet.h"
 #include "debugproc.h"
 #include "meshfield.h"
+#include "shawar.h"
 
 //*****************************************************************************
 // マクロ定義
@@ -365,13 +366,62 @@ void UpdatePlayer(void)
 
 
 	// 弾発射処理
-	if (GetKeyboardTrigger(DIK_SPACE))
+	if (GetKeyboardPress(DIK_SPACE))
 	{
-		SetBullet(g_Player.pos, g_Player.rot);
+		XMFLOAT3 pos;
+		XMFLOAT3 move;
+		XMFLOAT3 rot;
+
+		float fAngle, fLength;
+		int nLife;
+		float fSize;
+
+		pos = g_Player.pos;
+		rot = g_Player.rot;
+
+		fAngle = (float)(rand() % 628 - 314) / 100.0f;
+		fLength = rand() % (int)(5.0f * 200) / 100.0f - 5.0f;
+		move.x = sinf(fAngle) * fLength;
+		move.z = rand() % 300 / 100.0f + 10.0f;
+		move.y = cosf(fAngle) * fLength;
+
+		nLife = rand() % 5 + 3;
+
+		fSize = (float)(rand() % 30 + 20);
+
+		pos.y = fSize / 2;
+
+		// ビルボードの設定
+		SetShawar(pos, move, XMFLOAT4(0.0f, 0.0f, 1.0f, 0.85f),rot, fSize, fSize, nLife);
+
 	}
-	if (IsButtonTriggered(0, BUTTON_B))
+	if (IsButtonPressed(0, BUTTON_B))
 	{
-		SetBullet(g_Player.pos, g_Player.rot);
+		XMFLOAT3 pos;
+		XMFLOAT3 move;
+		XMFLOAT3 rot;
+
+		float fAngle, fLength;
+		int nLife;
+		float fSize;
+
+		pos = g_Player.pos;
+		rot = g_Player.rot;
+
+		fAngle = (float)(rand() % 628 - 314) / 100.0f;
+		fLength = rand() % (int)(5.0f * 200) / 100.0f - 5.0f;
+		move.x = sinf(fAngle) * fLength;
+		move.z = rand() % 300 / 100.0f + 10.0f;
+		move.y = cosf(fAngle) * fLength;
+
+		nLife = rand() % 5 + 5;
+
+		fSize = (float)(rand() % 30 + 20);
+
+		pos.y = fSize / 2;
+
+		// ビルボードの設定
+		SetShawar(pos, move, XMFLOAT4(0.0f, 0.0f, 1.0f, 0.85f), rot, fSize, fSize, nLife);
 	}
 
 

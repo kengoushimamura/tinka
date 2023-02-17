@@ -34,6 +34,6 @@ void UninitShawar(void);
 void UpdateShawar(void);
 void DrawShawar(void);
 
-int SetShawar(XMFLOAT3 pos, XMFLOAT3 move, XMFLOAT4 col, float fSizeX, float fSizeY, int nLife);
+int SetShawar(XMFLOAT3 pos, XMFLOAT3 move, XMFLOAT4 col, XMFLOAT3 rot, float fSizeX, float fSizeY, int nLife);
 void SetColorShawar(int nIdxParticle, XMFLOAT4 col);
 SHAWAR* GetShawar(void);

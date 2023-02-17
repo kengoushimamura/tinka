@@ -78,6 +78,30 @@ HRESULT InitEnemy(void)
 	g_Enemy[3].pos = XMFLOAT3(90.0f, ENEMY_OFFSET_Y, -150.0f);
 	g_Enemy[4].pos = XMFLOAT3(0.0f, ENEMY_OFFSET_Y, 0.0f);
 
+	for (int i = 0; i < MAX_ENEMY; i++)
+	{
+		if ((i >= 0) &&(i < 10))
+		{
+			g_Enemy[i].pos = XMFLOAT3((i * 10) - 50.0f, ENEMY_OFFSET_Y, 0.0f);
+		}
+		if ((i >= 10) && (i < 20))
+		{
+			g_Enemy[i].pos = XMFLOAT3(((i % 10) * 10) - 50.0f, ENEMY_OFFSET_Y, 30.0f);
+		}
+		if ((i >= 20) && (i < 30))
+		{
+			g_Enemy[i].pos = XMFLOAT3(((i % 10) * 10) - 50.0f, ENEMY_OFFSET_Y, 60.0f);
+		}
+		if ((i >= 30) && (i < 40))
+		{
+			g_Enemy[i].pos = XMFLOAT3(((i % 10) * 10) - 50.0f, ENEMY_OFFSET_Y, 90.0f);
+		}
+		if ((i >= 40) && (i < 50))
+		{
+			g_Enemy[i].pos = XMFLOAT3(((i % 10) * 10) - 50.0f, ENEMY_OFFSET_Y, 120.0f);
+		}
+	}
+
 
 	g_Load = TRUE;
 	return S_OK;

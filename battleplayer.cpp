@@ -285,6 +285,7 @@ void UpdateBattlePlayer(void)
 		if (cmd[0] == 0)
 		{
 			XMFLOAT3 pos;
+
 			XMFLOAT3 move = {0.0f,0.0f,0.0f};
 			float fAngle, fLength;
 			int nLife;
@@ -311,11 +312,14 @@ void UpdateBattlePlayer(void)
 			{
 				XMFLOAT3 pos;
 				XMFLOAT3 move;
+				XMFLOAT3 rot;
+
 				float fAngle, fLength;
 				int nLife;
 				float fSize;
 
 				pos = g_bPlayer.pos;
+				rot = g_bPlayer.rot;
 
 				fAngle = (float)(rand() % 628 - 314) / 100.0f;
 				fLength = rand() % (int)(5.0f * 200) / 100.0f - 5.0f;
@@ -330,7 +334,7 @@ void UpdateBattlePlayer(void)
 				pos.y = fSize / 2;
 
 				// ビルボードの設定
-				SetShawar(pos, move, XMFLOAT4(0.0f, 0.0f, 1.0f, 0.85f), fSize, fSize, nLife);
+				SetShawar(pos, move, XMFLOAT4(0.0f, 0.0f, 1.0f, 0.85f), rot, fSize, fSize, nLife);
 
 			}
 		}
@@ -366,11 +370,14 @@ void UpdateBattlePlayer(void)
 			{
 				XMFLOAT3 pos;
 				XMFLOAT3 move;
+				XMFLOAT3 rot;
+
 				float fAngle, fLength;
 				int nLife;
 				float fSize;
 
 				pos = g_bPlayer.pos;
+				rot = g_bPlayer.rot;
 
 				fAngle = (float)(rand() % 628 - 314) / 100.0f;
 				fLength = rand() % (int)(5.0f * 200) / 100.0f - 5.0f;
@@ -385,7 +392,7 @@ void UpdateBattlePlayer(void)
 				pos.y = fSize / 2;
 
 				// ビルボードの設定
-				SetShawar(pos, move, XMFLOAT4(0.0f, 0.0f, 1.0f, 0.85f), fSize, fSize, nLife);
+				SetShawar(pos, move, XMFLOAT4(0.0f, 0.0f, 1.0f, 0.85f), rot, fSize, fSize, nLife);
 
 			}
 		}

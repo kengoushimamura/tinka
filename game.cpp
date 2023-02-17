@@ -17,12 +17,13 @@
 #include "meshfield.h"
 #include "meshwall.h"
 #include "shadow.h"
-#include "tree.h"
+//#include "tree.h"
 #include "bullet.h"
 #include "score.h"
 #include "particle.h"
 #include "collision.h"
 #include "debugproc.h"
+#include"shawar.h"
 
 //*****************************************************************************
 // マクロ定義
@@ -85,7 +86,7 @@ HRESULT InitGame(void)
 		XMFLOAT4(1.0f, 1.0f, 1.0f, 0.25f), 16, 2, 80.0f, 80.0f);
 
 	// 木を生やす
-	InitTree();
+	//InitTree();
 
 	// 弾の初期化
 	InitBullet();
@@ -95,6 +96,8 @@ HRESULT InitGame(void)
 
 	// パーティクルの初期化
 	InitParticle();
+
+	InitShawar();
 
 	// BGM再生
 	PlaySound(SOUND_LABEL_BGM_sample001);
@@ -107,6 +110,8 @@ HRESULT InitGame(void)
 //=============================================================================
 void UninitGame(void)
 {
+
+	UninitShawar();
 	// パーティクルの終了処理
 	UninitParticle();
 
@@ -117,7 +122,7 @@ void UninitGame(void)
 	UninitBullet();
 
 	// 木の終了処理
-	UninitTree();
+	//UninitTree();
 
 	// 壁の終了処理
 	UninitMeshWall();
@@ -172,13 +177,15 @@ void UpdateGame(void)
 	UpdateMeshWall();
 
 	// 木の更新処理
-	UpdateTree();
+	//UpdateTree();
 
 	// 弾の更新処理
 	UpdateBullet();
 
 	// パーティクルの更新処理
 	UpdateParticle();
+
+	UpdateShawar();
 
 	// 影の更新処理
 	UpdateShadow();
@@ -215,11 +222,12 @@ void DrawGame0(void)
 	DrawMeshWall();
 
 	// 木の描画処理
-	DrawTree();
+	//DrawTree();
 
 	// パーティクルの描画処理
 	DrawParticle();
 
+	DrawShawar();
 
 	// 2Dの物を描画する処理
 	// Z比較なし
@@ -305,6 +313,8 @@ void CheckHit(void)
 	ENEMY *enemy = GetEnemy();		// エネミーのポインターを初期化
 	PLAYER *player = GetPlayer();	// プレイヤーのポインターを初期化
 	BULLET *bullet = GetBullet();	// 弾のポインターを初期化
+	SHAWAR* shawar = GetShawar();			//水のポインターを初期化
+
 
 	// 敵とプレイヤーキャラ
 	for (int i = 0; i < MAX_ENEMY; i++)
@@ -320,7 +330,7 @@ void CheckHit(void)
 			enemy[i].use = false;
 			ReleaseShadow(enemy[i].shadowIdx);
 
-			SetFade(FADE_OUT, MODE_BATTLE);
+			//SetFade(FADE_OUT, MODE_BATTLE);
 
 		}
 	}
@@ -351,12 +361,56 @@ void CheckHit(void)
 				enemy[j].use = false;
 				ReleaseShadow(enemy[j].shadowIdx);
 
-				SetFade(FADE_OUT, MODE_BATTLE);
+				//SetFade(FADE_OUT, MODE_BATTLE);
 
 			}
 		}
 
 	}
+
+	//水と敵
+	for (int i = 0; i < MAX_SHAWAR; i++)
+	{
+		//水の有効フラグをチェックする
+		if (shawar[i].bUse == false)
+			continue;
+
+		// 敵と当たってるか調べる
+		for (int j = 0; j < MAX_ENEMY; j++)
+		{
+			//敵の有効フラグをチェックする
+			if (enemy[j].use == false)
+				continue;
+
+			//BCの当たり判定
+			if (CollisionBC(shawar[i].pos, enemy[j].pos, SHAWAR_SIZE, enemy[j].size))
+			{
+				// 敵キャラクターは倒される
+				enemy[j].use = false;
+				ReleaseShadow(enemy[j].shadowIdx);
+
+				// スコアを足す
+				AddScore(10);
+			}
+		}
+
+	}
+
+
+	// ゲームモードエネミーが全部死亡したら状態遷移
+	int enemy_count = 0;
+	for (int i = 0; i < MAX_ENEMY; i++)
+	{
+		if (enemy[i].use == false) continue;
+		enemy_count++;
+	}
+
+	// ゲームモードエネミーが０匹？
+	if (enemy_count == 0)
+	{//リザルト画面へ
+		SetFade(FADE_OUT, MODE_RESULT);
+	}
+	
 
 
 

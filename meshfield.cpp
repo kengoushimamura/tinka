@@ -276,7 +276,9 @@ void UpdateMeshField(void)
 			// 波の高さ　= sin( -経過時間 * 周波数 + 距離 * 距離補正 ) * 振幅
 			if (gMode == MODE_GAME)
 			{//エンカウント場面では波を作る
-				g_Vertex[z * (g_nNumBlockXField + 1) + x].Position.y = sinf(-g_Time * g_wave_frequency + len * g_wave_correction) * g_wave_amplitude;
+				//g_Vertex[z * (g_nNumBlockXField + 1) + x].Position.y = sinf(-g_Time * g_wave_frequency + len * g_wave_correction) * g_wave_amplitude;
+				g_Vertex[z * (g_nNumBlockXField + 1) + x].Position.y = 0.0f;
+
 			}
 			else if (gMode == MODE_BATTLE)
 			{	//バトル画面では波を消す

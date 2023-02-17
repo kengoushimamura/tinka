@@ -143,8 +143,8 @@ void UpdateShawar(void)
 	{
 		if (g_aShawar[nCntShawar].bUse)
 		{	// 使用中
-			g_aShawar[nCntShawar].pos.x += g_aShawar[nCntShawar].move.x;
-			g_aShawar[nCntShawar].pos.z += g_aShawar[nCntShawar].move.z;
+			g_aShawar[nCntShawar].pos.x += g_aShawar[nCntShawar].move.x * sinf(g_aShawar[nCntShawar].rot.x);
+			g_aShawar[nCntShawar].pos.z += g_aShawar[nCntShawar].move.z * cosf(g_aShawar[nCntShawar].rot.x);
 			g_aShawar[nCntShawar].pos.y += g_aShawar[nCntShawar].move.y;
 
 			g_aShawar[nCntShawar].move.x += (0.0f - g_aShawar[nCntShawar].move.x) * 0.015f;
@@ -346,7 +346,7 @@ void SetColorShawar(int nIdxShawar, XMFLOAT4 col)
 //=============================================================================
 // パーティクルの発生処理
 //=============================================================================
-int SetShawar(XMFLOAT3 pos, XMFLOAT3 move, XMFLOAT4 col, float fSizeX, float fSizeY, int nLife)
+int SetShawar(XMFLOAT3 pos, XMFLOAT3 move, XMFLOAT4 col, XMFLOAT3 rot, float fSizeX, float fSizeY, int nLife)
 {
 	int nIdxShawar = -1;
 
@@ -355,7 +355,7 @@ int SetShawar(XMFLOAT3 pos, XMFLOAT3 move, XMFLOAT4 col, float fSizeX, float fSi
 		if (!g_aShawar[nCntShawar].bUse)
 		{
 			g_aShawar[nCntShawar].pos = pos;
-			g_aShawar[nCntShawar].rot = { 0.0f, 0.0f, 0.0f };
+			g_aShawar[nCntShawar].rot = rot;
 			g_aShawar[nCntShawar].scale = { 1.0f, 1.0f, 1.0f };
 			g_aShawar[nCntShawar].move = move;
 			g_aShawar[nCntShawar].material.Diffuse = col;
