@@ -380,7 +380,7 @@ void UpdatePlayer(void)
 
 		fAngle = (float)(rand() % 628 - 314) / 100.0f;
 		fLength = rand() % (int)(5.0f * 200) / 100.0f - 5.0f;
-		move.x = sinf(fAngle) * fLength;
+		move.x = rand() % 300 / 100.0f + 10.0f;
 		move.z = rand() % 300 / 100.0f + 10.0f;
 		move.y = cosf(fAngle) * fLength;
 
@@ -409,9 +409,11 @@ void UpdatePlayer(void)
 
 		fAngle = (float)(rand() % 628 - 314) / 100.0f;
 		fLength = rand() % (int)(5.0f * 200) / 100.0f - 5.0f;
-		move.x = sinf(fAngle) * fLength;
+		move.x = rand() % 300 / 100.0f + 10.0f;
 		move.z = rand() % 300 / 100.0f + 10.0f;
 		move.y = cosf(fAngle) * fLength;
+
+
 
 		nLife = rand() % 5 + 5;
 
