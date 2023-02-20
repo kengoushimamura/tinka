@@ -19,7 +19,7 @@
 //*****************************************************************************
 #define TEXTURE_WIDTH				(SCREEN_WIDTH)	// ”wŒiƒTƒCƒY
 #define TEXTURE_HEIGHT				(SCREEN_HEIGHT)	// 
-#define TEXTURE_MAX					(3)				// ƒeƒNƒXƒ`ƒƒ‚Ì”
+#define TEXTURE_MAX					(1)				// ƒeƒNƒXƒ`ƒƒ‚Ì”
 
 #define TEXTURE_WIDTH_LOGO			(480)			// ƒƒSƒTƒCƒY
 #define TEXTURE_HEIGHT_LOGO			(80)			// 
@@ -37,7 +37,6 @@ static ID3D11ShaderResourceView* g_Texture[TEXTURE_MAX] = { NULL };	// ƒeƒNƒXƒ`ƒ
 
 static char* g_TexturName[TEXTURE_MAX] = {
 	"data/TEXTURE/tutorial_1-1.png",
-	"data/TEXTURE/tutorial_2-1.png",
 };
 
 
@@ -48,7 +47,6 @@ static int						g_TexNo;					// ƒeƒNƒXƒ`ƒƒ”Ô†
 
 
 static BOOL						g_Load = FALSE;
-static int						setumei;					//à–¾‰æ‘œ‚Ì–‡”
 
 //=============================================================================
 // ‰Šú‰»ˆ—
@@ -57,7 +55,6 @@ HRESULT InitTutorial(void)
 {
 	ID3D11Device* pDevice = GetDevice();
 
-	setumei = 0;
 	//ƒeƒNƒXƒ`ƒƒ¶¬
 	for (int i = 0; i < TEXTURE_MAX; i++)
 	{
@@ -126,36 +123,20 @@ void UninitTutorial(void)
 //=============================================================================
 void UpdateTutorial(void)
 {
-	if (setumei >= 1)
-	{
-		if (GetKeyboardTrigger(DIK_RETURN))
-		{// Enter‰Ÿ‚µ‚½‚çAƒXƒe[ƒW‚ğØ‚è‘Ö‚¦‚é
-			SetFade(FADE_OUT, MODE_GAME);
-		}
-		// ƒQ[ƒ€ƒpƒbƒh‚Å“ü—Íˆ—
-		else if (IsButtonTriggered(0, BUTTON_START))
-		{
-			SetFade(FADE_OUT, MODE_GAME);
-		}
-		else if (IsButtonTriggered(0, BUTTON_B))
-		{
-			SetFade(FADE_OUT, MODE_GAME);
-		}
-	}
-
 	if (GetKeyboardTrigger(DIK_RETURN))
 	{// Enter‰Ÿ‚µ‚½‚çAƒXƒe[ƒW‚ğØ‚è‘Ö‚¦‚é
-		setumei += 1;
+		SetFade(FADE_OUT, MODE_GAME);
 	}
 	// ƒQ[ƒ€ƒpƒbƒh‚Å“ü—Íˆ—
 	else if (IsButtonTriggered(0, BUTTON_START))
 	{
-		setumei += 1;
+		SetFade(FADE_OUT, MODE_GAME);
 	}
 	else if (IsButtonTriggered(0, BUTTON_B))
 	{
-		setumei += 1;
+		SetFade(FADE_OUT, MODE_GAME);
 	}
+
 
 
 #ifdef _DEBUG	// ƒfƒoƒbƒOî•ñ‚ğ•\¦‚·‚é
@@ -189,28 +170,13 @@ void DrawTutorial(void)
 	SetMaterial(material);
 
 	// ƒ^ƒCƒgƒ‹‚Ì”wŒi‚ğ•`‰æ
-	if(setumei == 0)
-	{
-		// ƒeƒNƒXƒ`ƒƒİ’è
-		GetDeviceContext()->PSSetShaderResources(0, 1, &g_Texture[0]);
+	// ƒeƒNƒXƒ`ƒƒİ’è
+	GetDeviceContext()->PSSetShaderResources(0, 1, &g_Texture[0]);
 
-		// ‚P–‡‚Ìƒ|ƒŠƒSƒ“‚Ì’¸“_‚ÆƒeƒNƒXƒ`ƒƒÀ•W‚ğİ’è
-		SetSprite(g_VertexBuffer, g_Pos.x, g_Pos.y, g_w, g_h, 0.0f, 0.0f, 1.0f, 1.0f);
+	// ‚P–‡‚Ìƒ|ƒŠƒSƒ“‚Ì’¸“_‚ÆƒeƒNƒXƒ`ƒƒÀ•W‚ğİ’è
+	SetSprite(g_VertexBuffer, g_Pos.x, g_Pos.y, g_w, g_h, 0.0f, 0.0f, 1.0f, 1.0f);
 
-		// ƒ|ƒŠƒSƒ“•`‰æ
-		GetDeviceContext()->Draw(4, 0);
-	}
-	else
-	{
-		// ƒeƒNƒXƒ`ƒƒİ’è
-		GetDeviceContext()->PSSetShaderResources(0, 1, &g_Texture[1]);
-
-		// ‚P–‡‚Ìƒ|ƒŠƒSƒ“‚Ì’¸“_‚ÆƒeƒNƒXƒ`ƒƒÀ•W‚ğİ’è
-		SetSprite(g_VertexBuffer, g_Pos.x, g_Pos.y, g_w, g_h, 0.0f, 0.0f, 1.0f, 1.0f);
-
-		// ƒ|ƒŠƒSƒ“•`‰æ
-		GetDeviceContext()->Draw(4, 0);
-
-	}
+	// ƒ|ƒŠƒSƒ“•`‰æ
+	GetDeviceContext()->Draw(4, 0);
 
 }
