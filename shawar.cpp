@@ -13,8 +13,6 @@
 #include "shawar.h"
 #include "player.h"
 #include "enemy.h"
-#include "battleenemy.h"
-#include "battleplayer.h"
 
 
 //*****************************************************************************

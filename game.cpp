@@ -17,8 +17,6 @@
 #include "meshfield.h"
 #include "meshwall.h"
 #include "shadow.h"
-//#include "tree.h"
-#include "bullet.h"
 #include "score.h"
 #include "particle.h"
 #include "collision.h"
@@ -85,12 +83,6 @@ HRESULT InitGame(void)
 	InitMeshWall(XMFLOAT3(0.0f, 0.0f, MAP_DOWN), XMFLOAT3(0.0f, 0.0f, 0.0f),
 		XMFLOAT4(1.0f, 1.0f, 1.0f, 0.25f), 16, 2, 80.0f, 80.0f);
 
-	// 木を生やす
-	//InitTree();
-
-	// 弾の初期化
-	InitBullet();
-
 	// スコアの初期化
 	//InitScore();
 
@@ -115,14 +107,6 @@ void UninitGame(void)
 	// パーティクルの終了処理
 	UninitParticle();
 
-	// スコアの終了処理
-	//UninitScore();
-
-	// 弾の終了処理
-	UninitBullet();
-
-	// 木の終了処理
-	//UninitTree();
 
 	// 壁の終了処理
 	UninitMeshWall();
@@ -176,14 +160,9 @@ void UpdateGame(void)
 	// 壁処理の更新
 	UpdateMeshWall();
 
-	// 木の更新処理
-	//UpdateTree();
-
-	// 弾の更新処理
-	UpdateBullet();
-
 	// パーティクルの更新処理
 	UpdateParticle();
+
 
 	UpdateShawar();
 
@@ -215,14 +194,8 @@ void DrawGame0(void)
 	// プレイヤーの描画処理
 	DrawPlayer();
 
-	// 弾の描画処理
-	DrawBullet();
-
 	// 壁の描画処理
 	DrawMeshWall();
-
-	// 木の描画処理
-	//DrawTree();
 
 	// パーティクルの描画処理
 	DrawParticle();
@@ -312,7 +285,6 @@ void CheckHit(void)
 {
 	ENEMY *enemy = GetEnemy();		// エネミーのポインターを初期化
 	PLAYER *player = GetPlayer();	// プレイヤーのポインターを初期化
-	BULLET *bullet = GetBullet();	// 弾のポインターを初期化
 	SHAWAR* shawar = GetShawar();	//水のポインターを初期化
 
 
@@ -336,37 +308,6 @@ void CheckHit(void)
 	}
 
 
-	// プレイヤーの弾と敵
-	for (int i = 0; i < MAX_BULLET; i++)
-	{
-		//弾の有効フラグをチェックする
-		if (bullet[i].use == false)
-			continue;
-
-		// 敵と当たってるか調べる
-		for (int j = 0; j < MAX_ENEMY; j++)
-		{
-			//敵の有効フラグをチェックする
-			if (enemy[j].use == false)
-				continue;
-
-			//BCの当たり判定
-			if (CollisionBC(bullet[i].pos, enemy[j].pos, bullet[i].fWidth, enemy[j].size))
-			{
-				// 当たったから未使用に戻す
-				bullet[i].use = false;
-				ReleaseShadow(bullet[i].shadowIdx);
-
-				// 敵キャラクターは倒される
-				enemy[j].use = false;
-				ReleaseShadow(enemy[j].shadowIdx);
-
-				//SetFade(FADE_OUT, MODE_RESULT);
-
-			}
-		}
-
-	}
 
 	//水と敵
 	for (int i = 0; i < MAX_SHAWAR; i++)

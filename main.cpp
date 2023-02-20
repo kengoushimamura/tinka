@@ -18,7 +18,6 @@
 #include "title.h"
 #include "result.h"
 #include "debugproc.h"
-#include "battle.h"
 #include "score.h"
 #include "tutorial.h"
 
@@ -314,7 +313,6 @@ void Update(void)
 		break;
 
 	case MODE_BATTLE:		//バトル画面の更新
-		UpdateBattle();
 		break;
 
 	case MODE_RESULT:		// リザルト画面の更新
@@ -384,7 +382,6 @@ void Draw(void)
 		break;
 
 	case MODE_BATTLE:		//バトル画面の描画
-		DrawBattle();
 		break;
 
 	case MODE_RESULT:		// リザルト画面の描画
@@ -457,7 +454,6 @@ void SetMode(int mode)
 	UninitGame();
 
 	//　バトル画面の終了
-	UninitBattle();
 
 	// リザルト画面の終了処理
 	UninitResult();
@@ -484,7 +480,6 @@ void SetMode(int mode)
 
 	case MODE_BATTLE:
 		//バトル画面の初期化
-		InitBattle();
 		break;
 
 	case MODE_RESULT:

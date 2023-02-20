@@ -13,7 +13,6 @@
 #include "particle.h"
 #include "player.h"
 #include "enemy.h"
-#include "battleenemy.h"
 
 
 //*****************************************************************************
@@ -156,7 +155,6 @@ void UninitParticle(void)
 void UpdateParticle(void)
 {
 	ENEMY *enemy = GetEnemy();
-	bENEMY* beney = GetBattleEnemy();
 
 	{
 		for(int nCntParticle = 0; nCntParticle < MAX_PARTICLE; nCntParticle++)
@@ -240,38 +238,8 @@ void UpdateParticle(void)
 				}
 			}
 		}
-		else if (mode == MODE_BATTLE)
-		{
-			for (int j = 0; j < MAX_B_ENEMY; j++)
-			{
-				if (beney[j].use)
-				{
-					XMFLOAT3 pos;
-					XMFLOAT3 move;
-					float fAngle, fLength;
-					int nLife;
-					float fSize;
 
-					pos = beney[j].pos;
-
-					fAngle = (float)(rand() % 628 - 314) / 100.0f;
-					fLength = rand() % (int)(g_fWidthBase * 200) / 100.0f - g_fWidthBase;
-					move.x = sinf(fAngle) * fLength;
-					move.y = rand() % 300 / 100.0f + g_fHeightBase;
-					move.z = cosf(fAngle) * fLength;
-
-					nLife = rand() % 5 + 5;
-
-					fSize = (float)(rand() % 30 + 20);
-
-					pos.y = fSize / 2;
-
-					// ビルボードの設定
-					SetParticle(pos, move, XMFLOAT4(0.8f, 0.5f, 0.0f, 0.85f), fSize, fSize, nLife);
-				}
-			}
-
-		}
+		
 	}
 }
 

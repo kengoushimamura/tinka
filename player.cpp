@@ -12,7 +12,6 @@
 #include "model.h"
 #include "player.h"
 #include "shadow.h"
-#include "bullet.h"
 #include "debugproc.h"
 #include "meshfield.h"
 #include "shawar.h"

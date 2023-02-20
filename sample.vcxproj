@@ -138,7 +138,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="bullet.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="collision.h" />
     <ClInclude Include="debugproc.h" />
@@ -161,17 +160,10 @@
     <ClInclude Include="sprite.h" />
     <ClInclude Include="title.h" />
     <ClInclude Include="tree.h" />
-    <ClInclude Include="battle.h" />
-    <ClInclude Include="battleenemy.h" />
-    <ClInclude Include="battleplayer.h" />
-    <ClInclude Include="buttlebullet.h" />
     <ClInclude Include="tutorial.h" />
-    <ClInclude Include="command.h" />
     <ClInclude Include="shawar.h" />
-    <ClInclude Include="thander.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bullet.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="collision.cpp" />
     <ClCompile Include="debugproc.cpp" />
@@ -193,15 +185,8 @@
     <ClCompile Include="sound.cpp" />
     <ClCompile Include="sprite.cpp" />
     <ClCompile Include="title.cpp" />
-    <ClCompile Include="tree.cpp" />
-    <ClCompile Include="battle.cpp" />
-    <ClCompile Include="battleenemy.cpp" />
-    <ClCompile Include="battleplayer.cpp" />
-    <ClCompile Include="buttlebullet.cpp" />
     <ClCompile Include="tutorial.cpp" />
-    <ClCompile Include="command.cpp" />
     <ClCompile Include="shawar.cpp" />
-    <ClCompile Include="thander.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
