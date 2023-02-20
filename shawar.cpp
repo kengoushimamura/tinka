@@ -143,13 +143,13 @@ void UpdateShawar(void)
 	{
 		if (g_aShawar[nCntShawar].bUse)
 		{	// Žg—p’†
-			g_aShawar[nCntShawar].pos.x += g_aShawar[nCntShawar].move.x * sinf(g_aShawar[nCntShawar].rot.x);
-			g_aShawar[nCntShawar].pos.z += g_aShawar[nCntShawar].move.z * cosf(g_aShawar[nCntShawar].rot.x);
-			g_aShawar[nCntShawar].pos.y += g_aShawar[nCntShawar].move.y;
+			g_aShawar[nCntShawar].pos.x -= g_aShawar[nCntShawar].move.x * sinf(g_aShawar[nCntShawar].rot.y);
+			g_aShawar[nCntShawar].pos.z -= g_aShawar[nCntShawar].move.z * cosf(g_aShawar[nCntShawar].rot.y);
+			g_aShawar[nCntShawar].pos.y -= g_aShawar[nCntShawar].move.y;
 
 			g_aShawar[nCntShawar].move.x += (0.0f - g_aShawar[nCntShawar].move.x) * 0.015f;
-			g_aShawar[nCntShawar].move.y -= (0.0f - g_aShawar[nCntShawar].move.y) * 0.015f;
-			g_aShawar[nCntShawar].move.z += 0.25f;
+			g_aShawar[nCntShawar].move.y += (0.0f - g_aShawar[nCntShawar].move.y) * 0.015f;
+			g_aShawar[nCntShawar].move.z += (0.0f - g_aShawar[nCntShawar].move.z) * 0.015f;
 
 #ifdef DISP_SHADOW
 			if (g_aShawar[nCntShawar].nIdxShadow != -1)

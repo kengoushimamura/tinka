@@ -227,8 +227,7 @@ void PixelShaderPolygon( in  float4 inPosition		: SV_POSITION,
 		//if ((angle < 0.5f)&&(angle > -0.5f))
 		if (angle > -0.3f)
 		{
-			outDiffuse.rg = 1.0f;
-			outDiffuse.g = 0.0f;
+			outDiffuse.r = 1.0f;
 		}
 	}
 

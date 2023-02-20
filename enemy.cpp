@@ -52,7 +52,7 @@ HRESULT InitEnemy(void)
 
 		g_Enemy[i].pos = XMFLOAT3( 0.0f, ENEMY_OFFSET_Y, 20.0f);
 		g_Enemy[i].rot = XMFLOAT3(0.0f, 0.0f, 0.0f);
-		g_Enemy[i].scl = XMFLOAT3(0.125f, 0.125f, 0.125f);
+		g_Enemy[i].scl = XMFLOAT3(0.3f, 0.3f, 0.3f);
 
 		g_Enemy[i].spd = 0.0f;			// 移動スピードクリア
 		g_Enemy[i].size = ENEMY_SIZE;	// 当たり判定の大きさ

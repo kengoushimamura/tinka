@@ -313,7 +313,7 @@ void CheckHit(void)
 	ENEMY *enemy = GetEnemy();		// エネミーのポインターを初期化
 	PLAYER *player = GetPlayer();	// プレイヤーのポインターを初期化
 	BULLET *bullet = GetBullet();	// 弾のポインターを初期化
-	SHAWAR* shawar = GetShawar();			//水のポインターを初期化
+	SHAWAR* shawar = GetShawar();	//水のポインターを初期化
 
 
 	// 敵とプレイヤーキャラ
@@ -327,10 +327,10 @@ void CheckHit(void)
 		if (CollisionBC(player->pos, enemy[i].pos, player->size, enemy[i].size))
 		{
 			// 敵キャラクターは倒される
-			enemy[i].use = false;
-			ReleaseShadow(enemy[i].shadowIdx);
+			player[i].use = false;
+			ReleaseShadow(player[i].shadowIdx);
 
-			//SetFade(FADE_OUT, MODE_BATTLE);
+			SetFade(FADE_OUT, MODE_RESULT);
 
 		}
 	}
@@ -361,7 +361,7 @@ void CheckHit(void)
 				enemy[j].use = false;
 				ReleaseShadow(enemy[j].shadowIdx);
 
-				//SetFade(FADE_OUT, MODE_BATTLE);
+				//SetFade(FADE_OUT, MODE_RESULT);
 
 			}
 		}
