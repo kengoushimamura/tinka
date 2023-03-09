@@ -61,7 +61,7 @@ HRESULT InitGame(void)
 	InitPlayer();
 
 	// エネミーの初期化
-	//InitEnemy();
+	InitEnemy();
 
 	// 壁の初期化
 	InitMeshWall(XMFLOAT3(0.0f, 0.0f, MAP_TOP), XMFLOAT3(0.0f, 0.0f, 0.0f),
@@ -84,7 +84,7 @@ HRESULT InitGame(void)
 		XMFLOAT4(1.0f, 1.0f, 1.0f, 0.25f), 16, 2, 80.0f, 80.0f);
 
 	// スコアの初期化
-	//InitScore();
+	InitScore();
 
 	// パーティクルの初期化
 	InitParticle();
@@ -115,10 +115,10 @@ void UninitGame(void)
 	UninitMeshField();
 
 	//// エネミーの終了処理
-	//UninitEnemy();
+	UninitEnemy();
 
 	//// プレイヤーの終了処理
-	//UninitPlayer();
+	UninitPlayer();
 
 	// 影の終了処理
 	UninitShadow();
@@ -289,23 +289,21 @@ void CheckHit(void)
 
 
 	// 敵とプレイヤーキャラ
-	for (int i = 0; i < MAX_ENEMY; i++)
-	{
-		//敵の有効フラグをチェックする
-		if (enemy[i].use == false)
-			continue;
+	//for (int i = 0; i < MAX_ENEMY; i++)
+	//{
+	//	//敵の有効フラグをチェックする
+	//	if (enemy[i].use == false)
+	//		continue;
 
-		//BCの当たり判定
-		if (CollisionBC(player->pos, enemy[i].pos, player->size, enemy[i].size))
-		{
-			// 敵キャラクターは倒される
-			player[i].use = false;
-			ReleaseShadow(player[i].shadowIdx);
+	//	//BCの当たり判定
+	//	if (CollisionBC(player->pos, enemy[i].pos, player->size, enemy[i].size))
+	//	{
+	//		//キャラクターは倒される
 
-			SetFade(FADE_OUT, MODE_RESULT);
+	//		SetFade(FADE_OUT, MODE_RESULT);
 
-		}
-	}
+	//	}
+	//}
 
 
 
