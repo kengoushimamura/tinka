@@ -72,15 +72,10 @@ HRESULT InitEnemy(void)
 
 	}
 
-	g_Enemy[0].pos = XMFLOAT3(100.0f, ENEMY_OFFSET_Y, 0.0f);
-	g_Enemy[1].pos = XMFLOAT3(-150.0f, ENEMY_OFFSET_Y, 0.0f);
-	g_Enemy[2].pos = XMFLOAT3(50.0f, ENEMY_OFFSET_Y, 100.0f);
-	g_Enemy[3].pos = XMFLOAT3(90.0f, ENEMY_OFFSET_Y, -150.0f);
-	g_Enemy[4].pos = XMFLOAT3(0.0f, ENEMY_OFFSET_Y, 0.0f);
-
+	// エネミーの出現位置を設定
 	for (int i = 0; i < MAX_ENEMY; i++)
 	{
-		if ((i >= 0) &&(i < 10))
+		if ((i >= 0) &&(i < 10))// 10体毎にずらしていく
 		{
 			g_Enemy[i].pos = XMFLOAT3((i * 10) - 50.0f, ENEMY_OFFSET_Y, 0.0f);
 		}
@@ -113,7 +108,7 @@ HRESULT InitEnemy(void)
 void UninitEnemy(void)
 {
 	if (g_Load == FALSE) return;
-
+	// エネミーの解放処理
 	for (int i = 0; i < MAX_ENEMY; i++)
 	{
 		if (g_Enemy[i].load)
@@ -156,7 +151,7 @@ void UpdateEnemy(void)
 			}
 
 			//////////////////////////////////////////////////////////////////////
-			// 姿勢制御
+			// 地面に対して垂直に
 			//////////////////////////////////////////////////////////////////////
 
 			XMVECTOR vx, nvx, up;
@@ -200,6 +195,7 @@ void DrawEnemy(void)
 	// カリング無効
 	SetCullingMode(CULL_MODE_NONE);
 
+	// 縁取り
 	SetFuchi(2);
 
 	for (int i = 0; i < MAX_ENEMY; i++)
@@ -230,6 +226,8 @@ void DrawEnemy(void)
 		// モデル描画
 		DrawModel(&g_Enemy[i].model);
 	}
+
+	// 縁取り
 	SetFuchi(0);
 
 

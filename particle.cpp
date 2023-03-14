@@ -161,31 +161,22 @@ void UpdateParticle(void)
 		{
 			if(g_aParticle[nCntParticle].bUse)
 			{// 使用中
+
+				// 移動処理
 				g_aParticle[nCntParticle].pos.x += g_aParticle[nCntParticle].move.x;
 				g_aParticle[nCntParticle].pos.z += g_aParticle[nCntParticle].move.z;
 				g_aParticle[nCntParticle].pos.y += g_aParticle[nCntParticle].move.y;
 
+				// 移動量調整
 				g_aParticle[nCntParticle].move.x += (0.0f - g_aParticle[nCntParticle].move.x) * 0.015f;
 				g_aParticle[nCntParticle].move.y -= 0.25f;
 				g_aParticle[nCntParticle].move.z += (0.0f - g_aParticle[nCntParticle].move.z) * 0.015f;
 
-#ifdef DISP_SHADOW
-				//if(g_aParticle[nCntParticle].nIdxShadow != -1)
-				//{// 影使用中
-				//	float colA;
-
-				//	// 影の位置設定
-				//	SetPositionShadow(g_aParticle[nCntParticle].nIdxShadow, XMFLOAT3(g_aParticle[nCntParticle].pos.x, 0.1f, g_aParticle[nCntParticle].pos.z));
-
-				//	// 影の色の設定
-				//	colA = g_aParticle[nCntParticle].material.Diffuse.w;
-				//	SetColorShadow(g_aParticle[nCntParticle].nIdxShadow, XMFLOAT4(0.5f, 0.5f, 0.5f, colA));
-				//}
-#endif
-
+				// 表示残り時間減少
 				g_aParticle[nCntParticle].nLife--;
+
 				if(g_aParticle[nCntParticle].nLife <= 0)
-				{
+				{// 表示時間が終了
 					g_aParticle[nCntParticle].bUse = false;
 					ReleaseShadow(g_aParticle[nCntParticle].nIdxShadow);
 					g_aParticle[nCntParticle].nIdxShadow = -1;
@@ -194,7 +185,7 @@ void UpdateParticle(void)
 				{
 					if(g_aParticle[nCntParticle].nLife <= 20)
 					{
-						// α値設定
+						// 少しずつ薄くする
 						g_aParticle[nCntParticle].material.Diffuse.w -= 0.05f;
 						if(g_aParticle[nCntParticle].material.Diffuse.w < 0.0f)
 						{
@@ -206,38 +197,34 @@ void UpdateParticle(void)
 		}
 
 		// パーティクル発生
-		int mode = GetMode();
-		if (mode == MODE_GAME)
+		for (int j = 0; j < MAX_ENEMY; j++)
 		{
-			for (int j = 0; j < MAX_ENEMY; j++)
-			{
-				if (enemy[j].use)
-				{
-					XMFLOAT3 pos;
-					XMFLOAT3 move;
-					float fAngle, fLength;
-					int nLife;
-					float fSize;
+			if (enemy[j].use)
+			{// エネミーに合わせて生成
+				XMFLOAT3 pos;
+				XMFLOAT3 move;
+				float fAngle, fLength;
+				int nLife;
+				float fSize;
 
-					pos = enemy[j].pos;
+				pos = enemy[j].pos;
 
-					fAngle = (float)(rand() % 628 - 314) / 100.0f;
-					fLength = rand() % (int)(g_fWidthBase * 200) / 100.0f - g_fWidthBase;
-					move.x = sinf(fAngle) * fLength;
-					move.y = rand() % 300 / 100.0f + g_fHeightBase;
-					move.z = cosf(fAngle) * fLength;
+				fAngle = (float)(rand() % 628 - 314) / 100.0f;
+				fLength = rand() % (int)(g_fWidthBase * 200) / 100.0f - g_fWidthBase;
+				move.x = sinf(fAngle) * fLength;
+				move.y = rand() % 300 / 100.0f + g_fHeightBase;
+				move.z = cosf(fAngle) * fLength;
 
-					nLife = rand() % 15 + 5;
+				nLife = rand() % 15 + 5;
 
-					fSize = (float)(rand() % 30 + 20);
+				fSize = (float)(rand() % 30 + 20);
 
-					pos.y = fSize / 2;
+				pos.y = fSize / 2;
 
-					// ビルボードの設定
-					SetParticle(pos, move, XMFLOAT4(0.8f, 0.5f, 0.0f, 0.85f), fSize, fSize, nLife);
-				}
+				SetParticle(pos, move, XMFLOAT4(0.8f, 0.5f, 0.0f, 0.85f), fSize, fSize, nLife);
 			}
 		}
+		
 
 		
 	}
@@ -284,12 +271,7 @@ void DrawParticle(void)
 			// ビューマトリックスを取得
 			mtxView = XMLoadFloat4x4(&cam->mtxView);
 
-			//mtxWorld = XMMatrixInverse(nullptr, mtxView);
-			//mtxWorld.r[3].m128_f32[0] = 0.0f;
-			//mtxWorld.r[3].m128_f32[1] = 0.0f;
-			//mtxWorld.r[3].m128_f32[2] = 0.0f;
-
-			// 処理が速いしお勧め
+			// ビルボード処理
 			mtxWorld.r[0].m128_f32[0] = mtxView.r[0].m128_f32[0];
 			mtxWorld.r[0].m128_f32[1] = mtxView.r[1].m128_f32[0];
 			mtxWorld.r[0].m128_f32[2] = mtxView.r[2].m128_f32[0];
@@ -416,15 +398,6 @@ int SetParticle(XMFLOAT3 pos, XMFLOAT3 move, XMFLOAT4 col, float fSizeX, float f
 			g_aParticle[nCntParticle].bUse = true;
 
 			nIdxParticle = nCntParticle;
-
-#ifdef DISP_SHADOW
-			// 影の設定
-			//g_aParticle[nCntParticle].nIdxShadow = CreateShadow(XMFLOAT3(pos.x, 0.1f, pos.z), 0.8f, 0.8f);		// 影の設定
-			//if(g_aParticle[nCntParticle].nIdxShadow != -1)
-			//{
-			//	SetColorShadow(g_aParticle[nCntParticle].nIdxShadow, XMFLOAT4(1.0f, 1.0f, 1.0f, 0.5f));
-			//}
-#endif
 
 			break;
 		}

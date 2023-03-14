@@ -54,7 +54,7 @@ HRESULT InitGame(void)
 	// フィールドの初期化
 	InitMeshField(XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f), 100, 100, 13.0f, 13.0f);
 
-	// ライトを有効化	// 影の初期化処理
+	// 影の初期化処理
 	InitShadow();
 
 	// プレイヤーの初期化
@@ -89,6 +89,7 @@ HRESULT InitGame(void)
 	// パーティクルの初期化
 	InitParticle();
 
+	// 水の初期化
 	InitShawar();
 
 	// BGM再生
@@ -102,8 +103,9 @@ HRESULT InitGame(void)
 //=============================================================================
 void UninitGame(void)
 {
-
+	// 水の終了処理
 	UninitShawar();
+
 	// パーティクルの終了処理
 	UninitParticle();
 
@@ -163,7 +165,7 @@ void UpdateGame(void)
 	// パーティクルの更新処理
 	UpdateParticle();
 
-
+	// 水の更新処理
 	UpdateShawar();
 
 	// 影の更新処理
@@ -200,6 +202,7 @@ void DrawGame0(void)
 	// パーティクルの描画処理
 	DrawParticle();
 
+	// 水の描画処理
 	DrawShawar();
 
 	// 2Dの物を描画する処理
@@ -234,7 +237,7 @@ void DrawGame(void)
 
 	// プレイヤー視点
 	pos = GetPlayer()->pos;
-	pos.y = 0.0f;			// カメラ酔いを防ぐためにクリアしている
+	pos.y = 0.0f;
 	SetCameraAT(pos);
 	SetCamera();
 
@@ -287,7 +290,7 @@ void CheckHit(void)
 	PLAYER *player = GetPlayer();	// プレイヤーのポインターを初期化
 	SHAWAR* shawar = GetShawar();	//水のポインターを初期化
 
-
+	//　爽快感を損なうため廃止
 	// 敵とプレイヤーキャラ
 	//for (int i = 0; i < MAX_ENEMY; i++)
 	//{

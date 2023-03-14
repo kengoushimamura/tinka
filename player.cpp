@@ -57,44 +57,6 @@ static LIGHT		g_Light;
 
 // プレイヤーの階層アニメーションデータ
 
-
-//// プレイヤーの頭を左右に動かしているアニメデータ
-//static INTERPOLATION_DATA move_tbl[] = {	// pos, rot, scl, frame
-//	{ XMFLOAT3(20.0f, 10.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f),      XMFLOAT3(1.0f, 1.0f, 1.0f), 120 },
-//	{ XMFLOAT3(20.0f, 10.0f, 0.0f), XMFLOAT3(XM_PI/2, 0.0f, 0.0f),   XMFLOAT3(1.0f, 1.0f, 1.0f), 240 },
-//	{ XMFLOAT3(20.0f, 10.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f),      XMFLOAT3(1.0f, 1.0f, 1.0f), 120 },
-//	{ XMFLOAT3(20.0f, 10.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f),	     XMFLOAT3(1.0f, 1.0f, 1.0f), 120 },
-//
-//};
-//
-//static INTERPOLATION_DATA move_tbl2[] = {	// pos, rot, scl, frame
-//	{ XMFLOAT3(-20.0f, 10.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f),         XMFLOAT3(1.0f, 1.0f, 1.0f), 120 },
-//	{ XMFLOAT3(-20.0f, 10.0f, 0.0f), XMFLOAT3(XM_PI / 2, 0.0f, 0.0f),    XMFLOAT3(1.0f, 1.0f, 1.0f), 240 },
-//	{ XMFLOAT3(-20.0f, 10.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f),         XMFLOAT3(1.0f, 1.0f, 1.0f), 120 },
-//	{ XMFLOAT3(-20.0f, 10.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f),	     XMFLOAT3(1.0f, 1.0f, 1.0f), 120 },
-//
-//};
-//
-//
-//// プレイヤーの歩いているアニメデータ
-//static INTERPOLATION_DATA walk_tbl[] = {	// pos, rot, scl, frame
-//	{ XMFLOAT3(0.0f, 10.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f),       XMFLOAT3(1.0f, 1.0f, 1.0f), 120 },
-//	{ XMFLOAT3(0.0f, 10.0f, 0.0f), XMFLOAT3(0.0f, -XM_PI / 2, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f), 240 },
-//	{ XMFLOAT3(0.0f, 10.0f, 0.0f), XMFLOAT3(0.0f, XM_PI / 2, 0.0f),  XMFLOAT3(1.0f, 1.0f, 1.0f), 120 },
-//	{ XMFLOAT3(0.0f, 10.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f),	     XMFLOAT3(1.0f, 1.0f, 1.0f), 120 },
-//
-//};
-//
-//
-//// プレイヤーの走っているアニメデータ
-//static INTERPOLATION_DATA run_tbl[] = {	// pos, rot, scl, frame
-//	{ XMFLOAT3(0.0f, 10.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f),       XMFLOAT3(1.0f, 1.0f, 1.0f), 120 },
-//	{ XMFLOAT3(0.0f, 10.0f, 0.0f), XMFLOAT3(0.0f, -XM_PI / 2, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f), 240 },
-//	{ XMFLOAT3(0.0f, 10.0f, 0.0f), XMFLOAT3(0.0f, XM_PI / 2, 0.0f),  XMFLOAT3(1.0f, 1.0f, 1.0f), 120 },
-//	{ XMFLOAT3(0.0f, 10.0f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f),	     XMFLOAT3(1.0f, 1.0f, 1.0f), 120 },
-//
-//};
-
 //右腕のアニメーション
 static INTERPOLATION_DATA move_tbl_right_arm[] = {	// pos, rot, scl, frame
 	{ XMFLOAT3(-5.0f,  5.0f, 0.0f), XMFLOAT3(0.0f, XM_PI / 2,     XM_PI / 4),	XMFLOAT3(1.0f, 1.0f, 1.0f), 15 },
@@ -137,7 +99,7 @@ static INTERPOLATION_DATA* g_MoveTblAdr[] =
 	move_tbl_left_leg,
 };
 
-//構造体の中からポインターを消したい
+//構造体の中からポインターを消す
 static PLAYER* Parent[] =
 {
 	&g_Player,
@@ -164,7 +126,7 @@ HRESULT InitPlayer(void)
 	g_Player.use = TRUE;			// true:生きてる
 	g_Player.size = PLAYER_SIZE;	// 当たり判定の大きさ
 
-	// ここでプレイヤー用の影を作成している
+	// 影生成
 	XMFLOAT3 pos = g_Player.pos;
 	pos.y -= (PLAYER_OFFSET_Y - 0.1f);
 	g_Player.shadowIdx = CreateShadow(pos, PLAYER_SHADOW_SIZE, PLAYER_SHADOW_SIZE);
@@ -186,14 +148,12 @@ HRESULT InitPlayer(void)
 		g_Parts[i].scl = XMFLOAT3(1.0f, 1.0f, 1.0f);
 
 		// 親子関係
-		g_Parts[i].parent = -1;		// ← ここに親のアドレスを入れる
+		g_Parts[i].parent = -1;		// ← 親のアドレス
 
 		// 階層アニメーション用のメンバー変数の初期化
 		g_Parts[i].move_time = 0.0f;	// 実行時間をクリア
 		g_Parts[i].tblNo = 0;			// 再生する行動データテーブルNoをセット
 		g_Parts[i].tblMax = 0;			// 再生する行動データテーブルのレコード数をセット
-
-
 
 		// パーツの読み込み
 		g_Parts[i].load = FALSE;
@@ -266,7 +226,6 @@ void UninitPlayer(void)
 	{
 		if (g_Parts[i].load == TRUE)
 		{
-			// パーツの解放処理
 			UnloadModel(&g_Parts[i].model);
 			g_Parts[i].load = FALSE;
 		}
@@ -364,7 +323,7 @@ void UpdatePlayer(void)
 	}
 
 
-	// 弾発射処理
+	// 水発射処理
 	if (GetKeyboardPress(DIK_SPACE))
 	{
 		XMFLOAT3 pos;
@@ -390,9 +349,8 @@ void UpdatePlayer(void)
 
 		pos.y = fSize / 2;
 
-		// ビルボードの設定
+		// 水をセット
 		SetShawar(pos, move, XMFLOAT4(0.0f, 0.0f, 1.0f, 0.85f),rot, fSize, fSize, nLife);
-
 	}
 	if (IsButtonPressed(0, BUTTON_B))
 	{
@@ -413,15 +371,13 @@ void UpdatePlayer(void)
 		move.z = rand() % 300 / 100.0f + 10.0f;
 		move.y = cosf(fAngle) * fLength;
 
-
-
 		nLife = rand() % 5 + 5;
 
 		fSize = (float)(rand() % 30 + 20);
 
 		pos.y = fSize / 2;
 
-		// ビルボードの設定
+		// 水をセット
 		SetShawar(pos, move, XMFLOAT4(0.0f, 0.0f, 1.0f, 0.85f), rot, fSize, fSize, nLife);
 	}
 
@@ -444,7 +400,6 @@ void UpdatePlayer(void)
 			float	time = g_Parts[i].move_time - index;
 			int		size = sizeof(move_tbl_right_arm) / sizeof(INTERPOLATION_DATA);
 
-			//float dt = 1.0f / g_Parts[i].tbl_adr[index].frame;			// 1フレームで進める時間
 			float dt = 1.0f / g_MoveTblAdr[g_Parts[i].tblNo][index].frame;	// 1フレームで進める時間
 			g_Parts[i].move_time += dt;										// アニメーションの合計時間に足す
 
@@ -506,7 +461,7 @@ void UpdatePlayer(void)
 
 
 	//////////////////////////////////////////////////////////////////////
-	// 姿勢制御
+	// 地形に対して垂直に
 	//////////////////////////////////////////////////////////////////////
 
 	XMVECTOR vx, nvx, up;
