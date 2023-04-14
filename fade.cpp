@@ -149,7 +149,6 @@ void UpdateFade(void)
 				g_Color.w = 0.0f;
 				SetFade(FADE_NONE, g_ModeNext);
 			}
-
 		}
 	}
 
